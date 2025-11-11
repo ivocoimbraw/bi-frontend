@@ -1,5 +1,7 @@
 import type { ReactNode } from "react"
+import { Suspense } from "react"
 import { FiltersBar } from "./filters-bar"
+import { Skeleton } from "@/components/ui/skeleton"
 
 interface DashboardLayoutProps {
   children: ReactNode
@@ -18,7 +20,9 @@ export function DashboardLayout({ children, title, description }: DashboardLayou
       </header>
 
       <main className="container mx-auto px-4 py-6 space-y-6">
-        <FiltersBar />
+        <Suspense fallback={<Skeleton className="h-20 w-full" />}>
+          <FiltersBar />
+        </Suspense>
         {children}
       </main>
     </div>
